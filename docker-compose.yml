@@ -1,0 +1,26 @@
+services:
+  api:
+    build: .
+    container_name: atividade11-api
+    ports:
+      - "5000:5000"
+    environment:
+      AMBIENTE: producao
+      PORTA: 5000
+    depends_on:
+      - banco
+
+  banco:
+    image: postgres:16
+    container_name: atividade11-banco
+    environment:
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: senha123
+      POSTGRES_DB: produtos
+    ports:
+      - "5432:5432"
+    volumes:
+      - dados_postgres:/var/lib/postgresql/data
+
+volumes:
+  dados_postgres:
